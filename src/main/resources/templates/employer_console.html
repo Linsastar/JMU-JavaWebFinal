@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employer Console</title>
+    <!-- 引入 Bootstrap 样式 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+    <h1 class="text-center mb-5">雇主控制台</h1>
+    <div class="row">
+        <div class="col-md-6">
+            <h2>发布招聘岗位信息</h2>
+            <form method="post" action="/employer_console/addEmployment">
+                <div class="mb-3">
+                    <label for="jobTitle" class="form-label">岗位标题</label>
+                    <input type="text" class="form-control" id="jobTitle" name="jobTitle" required>
+                </div>
+                <div class="mb-3">
+                    <label for="jobDescription" class="form-label">岗位描述</label>
+                    <textarea class="form-control" id="jobDescription" name="jobDescription" rows="3"
+                              required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">发布</button>
+            </form>
+        </div>
+        <div class="col-md-6">
+            <h2>管理招聘信息</h2>
+            <!-- 展示招聘信息的表格 -->
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>岗位标题</th>
+                    <th>状态</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="employment : ${employments}">
+                    <td th:text="${employment.jobTitle}"></td>
+                    <td th:text="${employment.status}"></td>
+                    <td>
+                        <form th:if="${employment.status != '已关闭'}" method="post"
+                              action="/employer_console/closeEmployment" style="display:inline;">
+                            <input type="hidden" name="employmentId" th:value="${employment.employmentId}">
+                            <button type="submit" class="btn btn-danger">关闭申请</button>
+                        </form>
+                        <form th:if="${employment.status == '已关闭'}" method="post"
+                              action="/employer_console/openEmployment" style="display:inline;">
+                            <input type="hidden" name="employmentId" th:value="${employment.employmentId}">
+                            <button type="submit" class="btn btn-success">开启申请</button>
+                        </form>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    <div class="row mt-5">
+        <div class="col">
+            <h2>查看应聘记录</h2>
+            <!-- 展示应聘记录的表格 -->
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>学生姓名</th>
+                    <th>岗位</th>
+                    <th>状态</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="job_application : ${job_applications}">
+                    <td th:text="${job_application.getStudentName()}"></td>
+                    <td th:text="${job_application.getJobTitle()}"></td>
+                    <td th:text="${job_application.getStatus()}"></td>
+                    <td>
+                        <a th:href="@{'/process/' + ${job_application.getApplicationId()}}" class="btn btn-primary">处理</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="col">
+            <h2>留言板</h2>
+            <form>
+                <div class="mb-3">
+                    <label for="message" class="form-label">留言内容</label>
+                    <textarea class="form-control" id="message" rows="3" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">提交留言</button>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- 引入 Bootstrap JavaScript 插件（包含 Popper） -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

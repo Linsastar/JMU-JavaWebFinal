@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>管理员管理界面</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h1 class="mt-5">管理员管理界面</h1>
+
+    <!-- 退出登录 -->
+    <form action="/admin/logout" method="POST" class="mt-3">
+        <button type="submit" class="btn btn-danger">退出登录</button>
+    </form>
+
+    <hr>
+
+    <!-- 用人单位注册信息审核 -->
+    <h2 class="mt-4">用人单位注册信息审核</h2>
+    <button type="button" class="btn btn-primary" onclick="location.href='/admin/reviewEmployers'">审核注册信息</button>
+
+    <hr>
+
+    <!-- 发布用工岗位 -->
+    <h2 class="mt-4">发布用工岗位</h2>
+    <button type="button" class="btn btn-primary" onclick="location.href='/admin/postJob'">发布岗位</button>
+
+    <hr>
+
+    <!-- 应聘/招聘信息管理 -->
+    <h2 class="mt-4">应聘/招聘信息管理</h2>
+    <button type="button" class="btn btn-primary" onclick="location.href='/admin/manageApplications'">管理应聘信息</button>
+    <button type="button" class="btn btn-primary" onclick="location.href='/admin/manageRecruitments'">管理招聘信息</button>
+
+    <hr>
+
+    <!-- 留言信息管理 -->
+    <h2 class="mt-4">留言信息管理</h2>
+    <button type="button" class="btn btn-primary" onclick="location.href='/admin/manageMessages'">管理留言信息</button>
+
+    <hr>
+
+    <!-- 学生信息管理 -->
+    <h2 class="mt-4">学生信息管理</h2>
+    <button type="button" class="btn btn-primary" onclick="location.href='/admin/manageStudents'">管理学生信息</button>
+
+    <hr>
+
+    <!-- 评分信息管理 -->
+    <h2 class="mt-4">评分信息管理</h2>
+    <button type="button" class="btn btn-primary" onclick="location.href='/admin/manageRatings'">管理评分信息</button>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
