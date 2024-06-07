@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>处理申请</title>
+    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            margin-top: 50px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        span {
+            font-weight: bold;
+        }
+
+        .btn-group {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .btn {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>处理申请</h1>
+    <p>申请者姓名：<span th:text="${job_application.getStudentName()}"></span></p>
+    <p>申请理由：<span th:text="${job_application.getNotes()}"></span></p>
+    <div class="btn-group">
+        <button class="btn btn-success">通过</button>
+        <button class="btn btn-danger">不通过</button>
+    </div>
+</div>
+</body>
+</html>

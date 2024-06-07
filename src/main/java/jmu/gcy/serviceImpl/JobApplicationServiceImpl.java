@@ -34,5 +34,13 @@ public class JobApplicationServiceImpl implements JobApplicationService {
         return jobApplications;
     }
 
+    @Override
+    public JobApplication getApplicationsByApplicationId(int applicationId) {
+        JobApplication jobApplication = jobApplicationMapper.getApplicationsByApplicationId(applicationId);
+        jobApplication.setStudentName(studentMapper.getStudentById(jobApplication.getStudentId()).getName());
+        jobApplication.setJobTitle(jobApplicationMapper.getEmploymentById(jobApplication.getEmploymentId()).getJobTitle());
+        return jobApplication;
+    }
+
 }
 

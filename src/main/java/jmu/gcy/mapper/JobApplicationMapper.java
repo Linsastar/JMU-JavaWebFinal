@@ -12,6 +12,10 @@ import java.util.List;
 public interface JobApplicationMapper extends BaseMapper<JobApplication> {
     @Select("SELECT * FROM job_application WHERE employer_id = #{employerId}")
     List<JobApplication> getApplicationsByEmployerId(int employerId);
+
     @Select("SELECT * FROM employment WHERE employment_id = #{employmentId}")
     Employment getEmploymentById(Integer employmentId);
+
+    @Select("SELECT * FROM job_application WHERE application_id = #{applicationId}")
+    JobApplication getApplicationsByApplicationId(int applicationId);
 }
