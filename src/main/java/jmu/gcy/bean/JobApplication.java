@@ -1,8 +1,6 @@
 package jmu.gcy.bean;
 
-import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 
 import java.util.Date;
@@ -23,6 +21,7 @@ public class JobApplication {
     private String notes;
     @TableField(exist = false)
     private String studentName;
+
 
     @TableField(exist = false)
     private String jobTitle;
@@ -85,6 +84,10 @@ public class JobApplication {
 
     public String getNotes() {
         return notes;
+    }
+
+    public String getNation(Student student) {
+        return student.getEthnicity();
     }
 
     public void setNotes(String notes) {

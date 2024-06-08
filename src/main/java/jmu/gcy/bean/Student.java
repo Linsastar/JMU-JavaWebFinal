@@ -11,7 +11,6 @@ public class Student {
     private Date dateOfBirth;
     private String politicalStatus;
 
-    // Getters and Setters
     public int getStudentId() {
         return studentId;
     }
