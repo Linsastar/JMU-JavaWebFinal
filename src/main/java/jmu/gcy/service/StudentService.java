@@ -7,4 +7,6 @@ import javax.servlet.http.HttpSession;
 public interface StudentService {
    Student login(String studentId, String password);
    void logout(HttpSession session);
+   Student getStudentById(Integer studentId);
+
 }
