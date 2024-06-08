@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="col-md-6">
+  <h2>个人简历</h2>
+  <!-- 展示招聘信息的表格 -->
+  <table class="table">
+    <thead>
+    <tr>
+      <th>id</th>
+      <th>姓名</th>
+      <th>性别</th>
+      <th>民族</th>
+      <th>户籍</th>
+      <th>出生日期</th>
+    </tr>
+    </thead>
+    <tbody>
+      <td th:text="${student.getStudentId()}"></td>
+      <td th:text="${student.getName()}"></td>
+      <td th:text="${student.getGender()}"></td>
+      <td th:text="${student.getEthnicity()}"></td>
+      <td th:text="${student.getNativePlace()}"></td>
+      <td th:text="${student.getDateOfBirth()}"></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>
