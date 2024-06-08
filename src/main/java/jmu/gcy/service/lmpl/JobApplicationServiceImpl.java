@@ -1,4 +1,4 @@
-package jmu.gcy.serviceImpl;
+package jmu.gcy.service.lmpl;
 
 import jmu.gcy.bean.Employment;
 import jmu.gcy.bean.JobApplication;
