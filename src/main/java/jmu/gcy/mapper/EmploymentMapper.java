@@ -9,6 +9,9 @@ import java.util.List;
 
 @Mapper
 public interface EmploymentMapper extends BaseMapper<Employment> {
-    @Select("SELECT * FROM employment")
+    @Select("SELECT * FROM employment where employer_id = #{employerId}")
     Employment getEmploymentById(Integer employmentId);
+    @Select("SELECT * FROM employment ")
+    Employment getAllEmployments();
+
 }

@@ -1,7 +1,11 @@
 
 package jmu.gcy.controller;
 
+import jmu.gcy.bean.Employer;
+import jmu.gcy.bean.Employment;
+import jmu.gcy.bean.JobApplication;
 import jmu.gcy.bean.Student;
+import jmu.gcy.service.EmploymentService;
 import jmu.gcy.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,19 +17,22 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 public class StudentLoginController {
 
     @Autowired
     private StudentService studentService;
+    @Autowired
+    private EmploymentService employmentService;
 
     @RequestMapping("/student/login")
     public String studentLogin(@RequestParam("student_id") String studentId, @RequestParam("password") String password, HttpSession session) {
         Student login = studentService.login(studentId, password);
         if (login != null) {
             session.setAttribute("loggedInstudent", login);
-            return "student_console";
+            return "redirect:/student_console";
         } else {
             return "student_error";
         }
@@ -58,6 +65,18 @@ public class StudentLoginController {
         } else {
             // 如果未登录，重定向到登录页面或显示错误页面
             return "redirect:/student/login"; // 或者 "student_error"
+        }
+    }
+
+    @GetMapping("/student_console")
+    public String showEmployerConsole(Model model, HttpSession session) {
+        if (session != null) {
+            List<Employment> employments = employmentService.getAllEmployments();
+            model.addAttribute("employments", employments);
+
+            return "student_console"; // 返回到名为 "employer_console" 的页面
+        } else {
+            return "redirect:/student/login"; // 如果未登录，重定向到登录页面
         }
     }
 

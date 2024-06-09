@@ -1,7 +1,6 @@
-package jmu.gcy.service.lmpl;
+package jmu.gcy.service.Impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import jmu.gcy.bean.Admin;
 import jmu.gcy.bean.Student;
 import jmu.gcy.mapper.StudentMapper;
 import jmu.gcy.service.StudentService;
@@ -18,10 +17,10 @@ public class StudentServiceImpl implements StudentService {
 
 
     @Override
-    public Student login(String username, String password) {
+    public Student login(String studentId, String password) {
         // 根据用户名和密码查询管理员信息
         Student student = studentMapper.selectOne(new QueryWrapper<Student>()
-                .eq("username", username)
+                .eq("student_id", studentId)
                 .eq("password", password));
         return student;
     }

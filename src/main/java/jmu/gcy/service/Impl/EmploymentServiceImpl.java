@@ -1,4 +1,4 @@
-package jmu.gcy.service.lmpl;
+package jmu.gcy.service.Impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
@@ -17,7 +17,9 @@ public class EmploymentServiceImpl implements EmploymentService {
 
     @Override
     public List<Employment> getAllEmployments() {
-        return employmentMapper.selectList(null);
+        QueryWrapper<Employment> queryWrapper = new QueryWrapper<>();
+        queryWrapper.select("*");
+        return employmentMapper.selectList(queryWrapper);
     }
 
     @Override

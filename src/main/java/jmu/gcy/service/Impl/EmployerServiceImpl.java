@@ -1,4 +1,4 @@
-package jmu.gcy.service.lmpl;
+package jmu.gcy.service.Impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import jmu.gcy.bean.Employer;
