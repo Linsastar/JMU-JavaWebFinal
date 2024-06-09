@@ -11,4 +11,10 @@ import java.util.List;
 public interface MessageBoardMapper extends BaseMapper<MessageBoard> {
     @Select("SELECT * FROM message_board WHERE employer_id = #{employerId}")
     List<MessageBoard> getMessagesByEmployerId(int employerId);
+
+    @Select("SELECT * FROM message_board")
+    List<MessageBoard> getAllMessages();
+
+    @Select("SELECT * FROM message_board WHERE message_id = #{commentId}")
+    void deleteMessage(int commentId);
 }

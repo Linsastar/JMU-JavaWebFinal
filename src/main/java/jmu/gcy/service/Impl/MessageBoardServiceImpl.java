@@ -17,4 +17,14 @@ public class MessageBoardServiceImpl implements MessageBoardService {
     public List<MessageBoard> getMessagesByEmployerId(int employerId) {
         return messageBoardMapper.getMessagesByEmployerId(employerId);
     }
+
+    @Override
+    public List<MessageBoard> getAllMessages() {
+        return messageBoardMapper.getAllMessages();
+    }
+
+    @Override
+    public void deleteMessage(int commentId) {
+        messageBoardMapper.deleteMessage(commentId);
+    }
 }

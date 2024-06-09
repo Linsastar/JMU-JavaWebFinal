@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>管理留言</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        /* 自定义样式 */
+        .btn-delete {
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1 class="mt-5">管理留言</h1>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>留言内容</th>
+            <th>留言人ID</th>
+            <th>时间</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="comment : ${comments}">
+            <td th:text="${comment.getMessageContent()}"></td>
+            <td th:text="${comment.getStudent_id()}"></td>
+            <td th:text="${#dates.format(comment.getSendTime(), 'yyyy-MM-dd HH:mm:ss')}"></td>
+            <td>
+                <form action="/deleteComment" method="post">
+                    <input type="hidden" name="commentId" th:value="${comment.getMessageId()}">
+                    <button type="submit" class="btn btn-danger btn-delete">删除</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
