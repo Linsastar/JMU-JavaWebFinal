@@ -7,6 +7,8 @@ import jmu.gcy.service.EmployerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class EmployerServiceImpl implements EmployerService {
 
@@ -20,5 +22,29 @@ public class EmployerServiceImpl implements EmployerService {
                 .eq("employer_id", employer_id)
                 .eq("password", password));
         return employer;
+    }
+
+    @Override
+    public List<Employer> getAllEmployers() {
+        return employerMapper.getAllEmployers();
+    }
+
+    @Override
+    public int registerEmployer(Employer employer) {
+        return employerMapper.insert(employer);
+    }
+
+    @Override
+    public void approveEmployer(int employerId) {
+        Employer employer = employerMapper.getEmployerById(employerId);
+        employer.setVerificationStatus("已通过");
+        employerMapper.update(employer, new QueryWrapper<Employer>().eq("employer_id", employerId));
+    }
+
+    @Override
+    public void rejectEmployer(int employerId) {
+        Employer employer = employerMapper.getEmployerById(employerId);
+        employer.setVerificationStatus("未通过");
+        employerMapper.update(employer, new QueryWrapper<Employer>().eq("employer_id", employerId));
     }
 }

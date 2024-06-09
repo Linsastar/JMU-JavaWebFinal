@@ -1,7 +1,6 @@
 package jmu.gcy.bean;
 
 import java.sql.Timestamp;
-import java.util.Date;
 
 public class Employer {
     private int employerId;
@@ -13,7 +12,6 @@ public class Employer {
     private String nature;
     private String email;
     private String scale;
-    private int adminId;
     private String contactNumber;
     private String verificationStatus;
     private Timestamp verificationTime;
@@ -91,14 +89,6 @@ public class Employer {
 
     public void setScale(String scale) {
         this.scale = scale;
-    }
-
-    public int getAdminId() {
-        return adminId;
-    }
-
-    public void setAdminId(int adminId) {
-        this.adminId = adminId;
     }
 
     public String getContactNumber() {

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>审核用人单位</title>
+    <!-- 引入 Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            background-color: #f8f9fa;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .container {
+            padding-top: 30px;
+        }
+
+        .table {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            border-collapse: separate; /* 确保有圆角效果 */
+        }
+
+        .table th {
+            background-color: #343a40;
+            color: #ffffff;
+        }
+
+        .table th, .table td {
+            text-align: center;
+            vertical-align: middle;
+            white-space: nowrap; /* 防止自动换行 */
+            overflow: hidden;
+            text-overflow: ellipsis; /* 超出部分用省略号表示 */
+            padding: 15px;
+        }
+
+        .table td a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .table td a:hover {
+            text-decoration: underline;
+        }
+
+        .table td a:hover i {
+            color: #0056b3;
+        }
+
+        .table-hover tbody tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .btn-group .btn {
+            margin-right: 5px;
+        }
+
+        .dropdown-menu a {
+            text-decoration: none;
+            color: black;
+        }
+
+        .tooltip-inner {
+            max-width: 200px;
+            text-align: left;
+        }
+
+        h1 {
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+        }
+
+        .card {
+            padding: 15px;
+            border-radius: 10px;
+            background-color: #ffffff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="card">
+        <h1 class="text-center">审核用人单位</h1>
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>用人单位编号</th>
+                <th>企业名称</th>
+                <th>联系人</th>
+                <th>规模</th>
+                <th>审核状态</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- 使用 Thymeleaf 循环遍历 employers 列表 -->
+            <tr th:each="employer : ${employers}">
+                <td th:text="${employer.employerId}"></td>
+                <td th:text="${employer.companyName}"></td>
+                <td th:text="${employer.contactPerson}"></td>
+                <td th:text="${employer.scale}"></td>
+                <td th:text="${employer.verificationStatus}"></td>
+                <td>
+                    <div class="btn-group">
+                        <button class="btn btn-secondary dropdown-toggle" type="button"
+                                id="dropdownMenuButton-[[${employer.employerId}]]"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                data-boundary="window">
+                            审核
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton-[[${employer.employerId}]]">
+                            <a class="dropdown-item"
+                               th:href="@{/admin/verifyEmployer(employerId=${employer.employerId}, action='approve')}">同意</a>
+                            <a class="dropdown-item"
+                               th:href="@{/admin/verifyEmployer(employerId=${employer.employerId}, action='reject')}">不同意</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- 引入 Font Awesome 图标库 -->
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+<!-- 引入 Bootstrap JS 和依赖 -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>用人单位注册</title>
+    <!-- 引入 Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f2f2f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>用人单位注册</h2>
+    <form action="/register_employer" method="POST">
+        <div class="form-group">
+            <label for="company_name">企业名称:</label>
+            <input type="text" class="form-control" id="company_name" name="company_name" required>
+        </div>
+        <div class="form-group">
+            <label for="password">登录密码:</label>
+            <input type="password" class="form-control" id="password" name="password" required>
+        </div>
+        <div class="form-group">
+            <label for="contact_person">联系人:</label>
+            <input type="text" class="form-control" id="contact_person" name="contact_person" required>
+        </div>
+        <div class="form-group">
+            <label for="address">地址:</label>
+            <input type="text" class="form-control" id="address" name="address">
+        </div>
+        <div class="form-group">
+            <label for="nature">性质:</label>
+            <select class="form-control" id="nature" name="nature">
+                <option value="">请选择</option>
+                <option value="私营">私营</option>
+                <option value="国有">国有</option>
+                <option value="合资">合资</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="email">电子邮箱:</label>
+            <input type="email" class="form-control" id="email" name="email">
+        </div>
+        <div class="form-group">
+            <label for="scale">规模:</label>
+            <input type="text" class="form-control" id="scale" name="scale">
+        </div>
+        <div class="form-group">
+            <label for="contact_number">联系电话:</label>
+            <input type="text" class="form-control" id="contact_number" name="contact_number">
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-block">注册</button>
+        </div>
+    </form>
+</div>
+
+<!-- 引入 Bootstrap JS 和依赖 -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
