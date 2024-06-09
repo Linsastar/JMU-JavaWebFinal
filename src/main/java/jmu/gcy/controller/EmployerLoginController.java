@@ -4,6 +4,7 @@ import jmu.gcy.bean.Employer;
 import jmu.gcy.service.EmployerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -24,6 +25,11 @@ public class EmployerLoginController {
         } else {
             return "employer_error"; // 登录失败，重定向到错误页面
         }
+    }
+
+    @GetMapping("/employer/register")
+    public String registerEmployer() {
+        return "employer_register";
     }
 }
 

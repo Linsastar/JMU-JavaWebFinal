@@ -22,7 +22,7 @@
 <body>
 <div class="container">
     <h1>请选择登录身份</h1>
-    <form action="/selectIdentity" method="POST">
+    <form action="/selectIdentity" method="POST" class="w-100">
         <div class="mb-3">
             <label for="identitySelect" class="form-label">选择身份：</label>
             <select class="form-select" id="identitySelect" name="identity">
@@ -31,11 +31,20 @@
                 <option value="student">学生</option>
             </select>
         </div>
-        <button type="submit" class="btn btn-primary">登录</button>
+        <div class="row">
+            <div class="col">
+                <button type="submit" class="btn btn-primary btn-block">登录</button>
+            </div>
+            <div class="col">
+                <button type="button" onclick="window.location.href='/visitor'" class="btn btn-secondary btn-block">
+                    访客
+                </button>
+            </div>
+        </div>
     </form>
-    <div class="mt-3">
-        <button onclick="window.location.href='/visitor'" class="btn btn-secondary">访客查看</button>
-    </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
