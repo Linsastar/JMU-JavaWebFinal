@@ -58,7 +58,6 @@
                 </tbody>
             </table>
         </div>
-
     </div>
     <div class="row mt-5">
         <div class="col">
@@ -89,13 +88,21 @@
     <div class="row mt-5">
         <div class="col">
             <h2>留言板</h2>
-            <form>
-                <div class="mb-3">
-                    <label for="message" class="form-label">留言内容</label>
-                    <textarea class="form-control" id="message" rows="3" required></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary">提交留言</button>
-            </form>
+            <!-- 展示留言的表格 -->
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>留言内容</th>
+                    <th>时间</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="comment : ${comments}">
+                    <td th:text="${comment.getMessageContent()}"></td>
+                    <td th:text="${#dates.format(comment.getSendTime(), 'yyyy-MM-dd HH:mm:ss')}"></td>
+                </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
