@@ -3,15 +3,16 @@ package jmu.gcy.controller;
 import jmu.gcy.bean.Employer;
 import jmu.gcy.bean.Employment;
 import jmu.gcy.bean.JobApplication;
-import jmu.gcy.mapper.EmploymentMapper;
+import jmu.gcy.bean.MessageBoard;
 import jmu.gcy.service.EmploymentService;
 import jmu.gcy.service.JobApplicationService;
+import jmu.gcy.service.MessageBoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.ui.Model;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -23,6 +24,8 @@ public class EmploymentController {
     private EmploymentService employmentService;
     @Autowired
     private JobApplicationService applicationService;
+    @Autowired
+    private MessageBoardService messageBoardService;
 
     @GetMapping("/employer_console")
     public String showEmployerConsole(Model model, HttpSession session) {
@@ -35,6 +38,9 @@ public class EmploymentController {
             // 获取应聘记录
             List<JobApplication> jobApplications = applicationService.getApplicationsByEmployerId(employerId);
             model.addAttribute("job_applications", jobApplications);
+
+            List<MessageBoard> messages = messageBoardService.getMessagesByEmployerId(employerId);
+            model.addAttribute("comments", messages);
 
             return "employer_console"; // 返回到名为 "employer_console" 的页面
         } else {
@@ -115,13 +121,6 @@ public class EmploymentController {
         } else {
             return "redirect:/employer/login"; // 如果未登录，重定向到登录页面
         }
-    }
-
-    @GetMapping("/searchEmployment")
-    public String searchEmployment(@RequestParam("type") String type, Model model) {
-        List<Employment> results = employmentService.findByTypeContaining(type);
-        model.addAttribute("results", results);
-        return "results";
     }
 
 
