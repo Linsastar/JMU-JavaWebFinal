@@ -10,6 +10,7 @@ public interface EmploymentService {
     List<Employment> getEmploymentsByEmployerId(int employerId);
     boolean closeEmployment(int employmentId);
     boolean openEmployment(int employmentId);
+    List<Employment> findByTypeContaining(String query);
     Employment getEmploymentById(Integer employmentId);
 }
 

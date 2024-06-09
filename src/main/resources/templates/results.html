@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>查询结果</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+  <h1>查询结果</h1>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Type</th>
+      <!-- 其他列... -->
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="employment : ${results}">
+      <td th:text="${employment.jobTitle}"></td>
+      <td th:text="${employment.type}"></td>
+      <!-- 其他列... -->
+    </tr>
+    </tbody>
+  </table>
+  <a href="/" class="btn btn-secondary">返回搜索</a>
+</div>
+</body>
+</html>

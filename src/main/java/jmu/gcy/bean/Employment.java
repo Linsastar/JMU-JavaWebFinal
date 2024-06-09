@@ -10,6 +10,22 @@ public class Employment {
     private String jobTitle;
     private String status;
     private String description;
+    private String type;
+
+    public Employment() {
+    }
+
+    public Employment(int employmentId, int employerId, Date startDate, String salaryInformation, String jobTitle, String status, String description, String type) {
+        this.employmentId = employmentId;
+        this.employerId = employerId;
+        this.startDate = startDate;
+        this.salaryInformation = salaryInformation;
+        this.jobTitle = jobTitle;
+        this.status = status;
+        this.description = description;
+        this.type = type;
+    }
+
 
     // Getters and setters
     public String getDescription() {
@@ -35,7 +51,6 @@ public class Employment {
     public void setEmployerId(int employerId) {
         this.employerId = employerId;
     }
-
 
     public Date getStartDate() {
         return startDate;
@@ -67,5 +82,25 @@ public class Employment {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    /**
+     * 获取
+     * @return type
+     */
+    public String getType() {
+        return type;
+    }
+
+    /**
+     * 设置
+     * @param type
+     */
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String toString() {
+        return "Employment{employmentId = " + employmentId + ", employerId = " + employerId + ", startDate = " + startDate + ", salaryInformation = " + salaryInformation + ", jobTitle = " + jobTitle + ", status = " + status + ", description = " + description + ", type = " + type + "}";
     }
 }

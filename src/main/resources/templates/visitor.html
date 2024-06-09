@@ -5,6 +5,16 @@
     <title>Title</title>
 </head>
 <body>
+<div class="container">
+    <h1>搜索就业类型</h1>
+    <form action="/search" method="GET">
+        <div class="mb-3">
+            <label for="searchQuery" class="form-label">输入查询关键词：</label>
+            <input type="text" class="form-control" id="searchQuery" name="type" placeholder="请输入关键词">
+        </div>
+        <button type="submit" class="btn btn-primary">搜索</button>
+    </form>
+</div>
 <div class="col-md-6">
     <h2>管理招聘信息</h2>
     <!-- 展示招聘信息的表格 -->
@@ -13,12 +23,14 @@
         <tr>
             <th>岗位标题</th>
             <th>状态</th>
+            <th>类型</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="employment : ${employments}">
             <td th:text="${employment.jobTitle}"></td>
             <td th:text="${employment.status}"></td>
+            <td th:text="${employment.getType()}"></td>
         </tr>
         </tbody>
     </table>

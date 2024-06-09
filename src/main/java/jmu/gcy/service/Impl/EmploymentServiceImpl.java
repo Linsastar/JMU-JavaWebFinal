@@ -63,6 +63,11 @@ public class EmploymentServiceImpl implements EmploymentService {
     }
 
     @Override
+    public List<Employment> findByTypeContaining(String query) {
+        return employmentMapper.findByTypeContaining(query);
+    }
+
+    @Override
     public Employment getEmploymentById(Integer employmentId) {
         return employmentMapper.selectById(employmentId);
     }

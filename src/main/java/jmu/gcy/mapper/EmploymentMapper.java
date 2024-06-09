@@ -9,6 +9,8 @@ import java.util.List;
 
 @Mapper
 public interface EmploymentMapper extends BaseMapper<Employment> {
+    @Select("SELECT * FROM employment where type like concat('%',#{type},'%')")
+     List<Employment> findByTypeContaining(String type);
     @Select("SELECT * FROM employment where employer_id = #{employerId}")
     Employment getEmploymentById(Integer employmentId);
     @Select("SELECT * FROM employment ")

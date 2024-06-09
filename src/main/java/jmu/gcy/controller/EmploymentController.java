@@ -3,6 +3,7 @@ package jmu.gcy.controller;
 import jmu.gcy.bean.Employer;
 import jmu.gcy.bean.Employment;
 import jmu.gcy.bean.JobApplication;
+import jmu.gcy.mapper.EmploymentMapper;
 import jmu.gcy.service.EmploymentService;
 import jmu.gcy.service.JobApplicationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -114,6 +115,13 @@ public class EmploymentController {
         } else {
             return "redirect:/employer/login"; // 如果未登录，重定向到登录页面
         }
+    }
+
+    @GetMapping("/searchEmployment")
+    public String searchEmployment(@RequestParam("type") String type, Model model) {
+        List<Employment> results = employmentService.findByTypeContaining(type);
+        model.addAttribute("results", results);
+        return "results";
     }
 
 
