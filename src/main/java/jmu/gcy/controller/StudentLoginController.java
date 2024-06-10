@@ -1,9 +1,11 @@
 
 package jmu.gcy.controller;
 
+import jmu.gcy.bean.Employer;
 import jmu.gcy.bean.Employment;
 import jmu.gcy.bean.JobApplication;
 import jmu.gcy.bean.Student;
+import jmu.gcy.service.EmployerService;
 import jmu.gcy.service.EmploymentService;
 import jmu.gcy.service.JobApplicationService;
 import jmu.gcy.service.StudentService;
@@ -28,6 +30,8 @@ public class StudentLoginController {
     private EmploymentService employmentService;
     @Autowired
     private JobApplicationService jobApplicationService;
+    @Autowired
+    private EmployerService employerService;
 
     @RequestMapping("/student/login")
     public String studentLogin(@RequestParam("student_id") String studentId, @RequestParam("password") String password, HttpSession session) {
@@ -75,7 +79,8 @@ public class StudentLoginController {
         if (session != null) {
             List<Employment> employments = employmentService.getAllEmployments();
             model.addAttribute("employments", employments);
-
+            List<Employer> enterprises = employerService.getAllEmployers();
+            model.addAttribute("enterprises", enterprises);
             return "student_console"; // 返回到名为 "employer_console" 的页面
         } else {
             return "redirect:/student/login"; // 如果未登录，重定向到登录页面

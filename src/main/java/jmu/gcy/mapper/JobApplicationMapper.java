@@ -18,4 +18,7 @@ public interface JobApplicationMapper extends BaseMapper<JobApplication> {
 
     @Select("SELECT * FROM job_application WHERE application_id = #{applicationId}")
     JobApplication getApplicationsByApplicationId(int applicationId);
+
+    @Select("SELECT * FROM job_application")
+    List<JobApplication> getAllJobApplications();
 }

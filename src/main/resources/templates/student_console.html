@@ -96,9 +96,9 @@
             </thead>
             <tbody>
             <tr th:each="enterprise : ${enterprises}">
-              <td th:text="${enterprise.name}"></td>
-              <td th:text="${enterprise.address}"></td>
-              <td th:text="${enterprise.contact}"></td>
+                <td th:text="${enterprise.getCompanyName()}"></td>
+                <td th:text="${enterprise.getAddress()}"></td>
+                <td th:text="${enterprise.getContactNumber()}"></td>
             </tr>
             </tbody>
           </table>

@@ -77,5 +77,10 @@ public class EmploymentServiceImpl implements EmploymentService {
     public Employer getEmployerById(int employmentId) {
         return employmentMapper.getEmployerById(employmentId);
     }
+
+    @Override
+    public Employment updateEmploymentStatus(Employment employment) {
+        return employmentMapper.updateEmploymentStatus(employment);
+    }
 }
 

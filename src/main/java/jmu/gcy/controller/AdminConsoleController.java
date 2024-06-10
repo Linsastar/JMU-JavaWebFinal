@@ -40,4 +40,14 @@ public class AdminConsoleController {
         // 返回审核后的页面（可以是审核列表页面）
         return "redirect:/admin/reviewEmployers";
     }
+
+    @GetMapping("/admin/manageApplications")
+    public String manageApplications(Model model) {
+        return "admin_manageApplications";
+    }
+
+    @GetMapping("/admin/manageRecruitments")
+    public String manageRecruitments(Model model) {
+        return "admin_manageRecruitments";
+    }
 }

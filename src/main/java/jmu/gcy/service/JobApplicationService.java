@@ -15,5 +15,7 @@ public interface JobApplicationService {
     public boolean rejectApplication(int applicationId);
 
     void insertApplication(JobApplication jobApplication);
+
+    List<JobApplication> getAllJobApplications();
 }
 

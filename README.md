@@ -23,8 +23,10 @@ JMU软件工程系JavaWeb期末作业
 - 防盗链
 
 ## 技术栈
-- **前端：** Thymeleaf, Bootstrap
-- **后端：** SpringBoot, MySQL, Maven, MyBatis-Plus, MySQL Connector/J, Spring Boot Starter Web
+
+- **前端：** Thymeleaf, Bootstrap ,Ajax, jQuery
+- **后端：** SpringBoot, MySQL, Maven, MyBatis-Plus, MySQL Connector/J, Spring Boot Starter Web , Spring Boot Starter
+  Security
 
 ## 运行方式
 1. 克隆项目到本地

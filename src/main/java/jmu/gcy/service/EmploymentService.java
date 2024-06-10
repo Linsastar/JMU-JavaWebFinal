@@ -16,6 +16,8 @@ public interface EmploymentService {
     Employment getEmploymentById(Integer employmentId);
 
     Employer getEmployerById(int employmentId);
+
+    Employment updateEmploymentStatus(Employment employment);
 }
 
 

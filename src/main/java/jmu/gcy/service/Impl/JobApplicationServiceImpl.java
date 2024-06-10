@@ -87,5 +87,10 @@ public class JobApplicationServiceImpl implements JobApplicationService {
         jobApplicationMapper.insert(jobApplication);
     }
 
+    @Override
+    public List<JobApplication> getAllJobApplications() {
+        return jobApplicationMapper.getAllJobApplications();
+    }
+
 }
 

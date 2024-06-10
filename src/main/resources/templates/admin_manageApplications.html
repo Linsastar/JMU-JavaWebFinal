@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>岗位管理</title>
+    <!-- 引入Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+    <h1 class="text-center mb-4">已申请岗位管理</h1>
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">申请ID</th>
+            <th scope="col">用工ID</th>
+            <th scope="col">学生ID</th>
+            <th scope="col">申请状态</th>
+            <th scope="col">申请备注</th>
+            <th scope="col">雇主ID</th>
+            <th scope="col">操作</th>
+        </tr>
+        </thead>
+        <tbody id="applications-table-body">
+        <!-- 动态数据 -->
+        </tbody>
+    </table>
+</div>
+
+<!-- 模态框 -->
+<div class="modal fade" id="statusModal" tabindex="-1" role="dialog" aria-labelledby="statusModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="statusModalLabel">更新申请状态</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="statusForm">
+                    <div class="form-group">
+                        <label for="applicationStatus">申请状态</label>
+                        <select class="form-control" id="applicationStatus" name="status">
+                            <option value="待处理">待处理</option>
+                            <option value="已录用">已录用</option>
+                            <option value="未录用">未录用</option>
+                        </select>
+                    </div>
+                    <input type="hidden" id="applicationId">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" id="saveStatusBtn">保存更改</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 引入jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<!-- 引入Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        // 加载岗位申请数据
+        loadApplications();
+
+        // 绑定保存按钮事件
+        $('#saveStatusBtn').on('click', function () {
+            updateApplicationStatus();
+        });
+    });
+
+    function loadApplications() {
+        $.ajax({
+            url: '/api/job-applications', // 假设这个URL是获取数据的API端点
+            method: 'GET',
+            success: function (data) {
+                let tableBody = $('#applications-table-body');
+                tableBody.empty();
+                data.forEach(function (application) {
+                    let row = `<tr>
+                        <td>${application.applicationId}</td>
+                        <td>${application.employmentId}</td>
+                        <td>${application.studentId}</td>
+                        <td>${application.status}</td>
+                        <td>${application.notes}</td>
+                        <td>${application.employerId}</td>
+                        <td>
+                            <button class="btn btn-info btn-sm" onclick="showStatusModal(${application.application_id}, '${application.status}')">修改状态</button>
+                        </td>
+                    </tr>`;
+                    tableBody.append(row);
+                });
+            },
+            error: function (err) {
+                alert('获取岗位申请数据失败');
+                console.error(err);
+            }
+        });
+    }
+
+    function showStatusModal(applicationId, currentStatus) {
+        $('#applicationId').val(applicationId);
+        $('#applicationStatus').val(currentStatus);
+        $('#statusModal').modal('show');
+    }
+
+    function updateApplicationStatus() {
+        let applicationId = $('#applicationId').val();
+        let newStatus = $('#applicationStatus').val();
+
+        $.ajax({
+            url: `/api/job-applications/${applicationId}`, // 假设这个URL是更新数据的API端点
+            method: 'PUT',
+            contentType: 'application/json',
+            data: JSON.stringify({status: newStatus}),
+            success: function (response) {
+                $('#statusModal').modal('hide');
+                loadApplications();
+            },
+            error: function (err) {
+                alert('更新申请状态失败');
+                console.error(err);
+            }
+        });
+    }
+</script>
+</body>
+</html>
