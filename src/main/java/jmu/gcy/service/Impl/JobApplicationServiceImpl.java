@@ -82,6 +82,10 @@ public class JobApplicationServiceImpl implements JobApplicationService {
         }
     }
 
+    @Override
+    public void insertApplication(JobApplication jobApplication) {
+        jobApplicationMapper.insert(jobApplication);
+    }
 
 }
 

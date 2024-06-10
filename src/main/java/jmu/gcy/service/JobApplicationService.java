@@ -13,5 +13,7 @@ public interface JobApplicationService {
     public boolean agreeApplication(int applicationId);
 
     public boolean rejectApplication(int applicationId);
+
+    void insertApplication(JobApplication jobApplication);
 }
 

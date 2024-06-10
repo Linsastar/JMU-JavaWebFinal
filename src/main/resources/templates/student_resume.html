@@ -2,33 +2,61 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Title</title>
+  <title>个人简历</title>
+  <!-- 引入 Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+
+    .container {
+      margin-top: 50px;
+    }
+
+    .table {
+      background-color: #ffffff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      color: #343a40;
+    }
+  </style>
 </head>
 <body>
-<div class="col-md-6">
-  <h2>个人简历</h2>
-  <!-- 展示招聘信息的表格 -->
-  <table class="table">
-    <thead>
-    <tr>
-      <th>id</th>
-      <th>姓名</th>
-      <th>性别</th>
-      <th>民族</th>
-      <th>户籍</th>
-      <th>出生日期</th>
-    </tr>
-    </thead>
-    <tbody>
-    <td th:text="${student.getStudentId()}"></td>
-    <td th:text="${student.getName()}"></td>
-    <td th:text="${student.getGender()}"></td>
-    <td th:text="${student.getEthnicity()}"></td>
-    <td th:text="${student.getNativePlace()}"></td>
-    <td th:text="${student.getDateOfBirth()}"></td>
-    </tr>
-    </tbody>
-  </table>
+<div class="container">
+  <div class="col-md-8 offset-md-2">
+    <h2 class="text-center">个人简历</h2>
+    <!-- 展示招聘信息的表格 -->
+    <table class="table table-striped table-bordered table-hover">
+      <thead class="thead-dark">
+      <tr>
+        <th>id</th>
+        <th>姓名</th>
+        <th>性别</th>
+        <th>民族</th>
+        <th>户籍</th>
+        <th>出生日期</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td th:text="${student.getStudentId()}"></td>
+        <td th:text="${student.getName()}"></td>
+        <td th:text="${student.getGender()}"></td>
+        <td th:text="${student.getEthnicity()}"></td>
+        <td th:text="${student.getNativePlace()}"></td>
+        <td th:text="${student.getDateOfBirth()}"></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
+<!-- 引入 Bootstrap JS 和依赖 -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

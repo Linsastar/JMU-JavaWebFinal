@@ -2,6 +2,7 @@ package jmu.gcy.service.Impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import jmu.gcy.bean.Employer;
 import jmu.gcy.bean.Employment;
 import jmu.gcy.mapper.EmploymentMapper;
 import jmu.gcy.service.EmploymentService;
@@ -70,6 +71,11 @@ public class EmploymentServiceImpl implements EmploymentService {
     @Override
     public Employment getEmploymentById(Integer employmentId) {
         return employmentMapper.selectById(employmentId);
+    }
+
+    @Override
+    public Employer getEmployerById(int employmentId) {
+        return employmentMapper.getEmployerById(employmentId);
     }
 }
 

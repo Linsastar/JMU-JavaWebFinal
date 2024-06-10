@@ -19,12 +19,22 @@ public class JobApplication {
     private String status;
 
     private String notes;
+
+    private int employerId;
     @TableField(exist = false)
     private String studentName;
 
 
     @TableField(exist = false)
     private String jobTitle;
+
+    public int getEmployerId() {
+        return employerId;
+    }
+
+    public void setEmployerId(int employerId) {
+        this.employerId = employerId;
+    }
 
     public String getStudentName() {
         return studentName;

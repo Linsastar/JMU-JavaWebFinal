@@ -3,37 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <!-- 引入 Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-<div class="container">
-    <h1>搜索就业类型</h1>
-    <form action="/search" method="GET">
+<div class="container mt-5">
+    <h1 class="text-center">搜索就业类型</h1>
+    <form action="/search" method="GET" class="mb-4">
         <div class="mb-3">
             <label for="searchQuery" class="form-label">输入查询关键词：</label>
             <input type="text" class="form-control" id="searchQuery" name="type" placeholder="请输入关键词">
         </div>
-        <button type="submit" class="btn btn-primary">搜索</button>
+        <div class="d-grid">
+            <button type="submit" class="btn btn-primary">搜索</button>
+        </div>
     </form>
+
+    <div class="col-md-12">
+        <h2 class="text-center mb-4">管理招聘信息</h2>
+        <!-- 展示招聘信息的表格 -->
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead class="table-dark">
+                <tr>
+                    <th>岗位标题</th>
+                    <th>状态</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="employment : ${employments}">
+                    <td th:text="${employment.jobTitle}"></td>
+                    <td th:text="${employment.status}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
-<div class="col-md-6">
-    <h2>管理招聘信息</h2>
-    <!-- 展示招聘信息的表格 -->
-    <table class="table">
-        <thead>
-        <tr>
-            <th>岗位标题</th>
-            <th>状态</th>
-            <th>类型</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="employment : ${employments}">
-            <td th:text="${employment.jobTitle}"></td>
-            <td th:text="${employment.status}"></td>
-            <td th:text="${employment.getType()}"></td>
-        </tr>
-        </tbody>
-    </table>
-</div>
+
+<!-- 引入 Bootstrap JS 和 Popper.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.min.js"></script>
 </body>
 </html>
