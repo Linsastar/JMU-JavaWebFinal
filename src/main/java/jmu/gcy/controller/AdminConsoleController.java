@@ -50,4 +50,9 @@ public class AdminConsoleController {
     public String manageRecruitments(Model model) {
         return "admin_manageRecruitments";
     }
+
+    @GetMapping("/admin/manageStudents")
+    public String manageStudents(Model model) {
+        return "admin_manageStudents";
+    }
 }

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>学生管理</title>
+    <!-- 引入Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+    <h1 class="text-center mb-4">学生管理</h1>
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">学号</th>
+            <th scope="col">姓名</th>
+            <th scope="col">性别</th>
+            <th scope="col">民族</th>
+            <th scope="col">籍贯</th>
+            <th scope="col">出生日期</th>
+            <th scope="col">政治面貌</th>
+            <th scope="col">操作</th>
+        </tr>
+        </thead>
+        <tbody id="students-table-body">
+        <!-- 动态数据 -->
+        </tbody>
+    </table>
+</div>
+
+<!-- 模态框 -->
+<div class="modal fade" id="studentModal" tabindex="-1" role="dialog" aria-labelledby="studentModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="studentModalLabel">编辑学生信息</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="studentForm">
+                    <div class="form-group">
+                        <label for="studentName">姓名</label>
+                        <input type="text" class="form-control" id="studentName" name="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="studentGender">性别</label>
+                        <input type="text" class="form-control" id="studentGender" name="gender">
+                    </div>
+                    <div class="form-group">
+                        <label for="studentEthnicity">民族</label>
+                        <input type="text" class="form-control" id="studentEthnicity" name="ethnicity">
+                    </div>
+                    <div class="form-group">
+                        <label for="studentNativePlace">籍贯</label>
+                        <input type="text" class="form-control" id="studentNativePlace" name="native_place">
+                    </div>
+                    <div class="form-group">
+                        <label for="studentDOB">出生日期</label>
+                        <input type="date" class="form-control" id="studentDOB" name="date_of_birth">
+                    </div>
+                    <div class="form-group">
+                        <label for="studentPoliticalStatus">政治面貌</label>
+                        <input type="text" class="form-control" id="studentPoliticalStatus" name="political_status">
+                    </div>
+                    <input type="hidden" id="studentId">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" id="saveStudentBtn">保存更改</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 引入jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<!-- 引入Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        // 加载学生数据
+        loadStudents();
+
+        // 绑定保存按钮事件
+        $('#saveStudentBtn').on('click', function () {
+            updateStudent();
+        });
+    });
+
+    function loadStudents() {
+        $.ajax({
+            url: '/api/students', // 假设这个URL是获取数据的API端点
+            method: 'GET',
+            success: function (data) {
+                let tableBody = $('#students-table-body');
+                tableBody.empty();
+                data.forEach(function (student) {
+                    let row = `<tr>
+                        <td>${student.studentId}</td>
+                        <td>${student.name}</td>
+                        <td>${student.gender}</td>
+                        <td>${student.ethnicity}</td>
+                        <td>${student.nativePlace}</td>
+                        <td>${student.dateOfBirth}</td>
+                        <td>${student.politicalStatus}</td>
+                        <td>
+                            <button class="btn btn-info btn-sm" onclick="showStudentModal(${student.studentId})">编辑</button>
+                        </td>
+                    </tr>`;
+                    tableBody.append(row);
+                });
+            },
+            error: function (err) {
+                alert('获取学生数据失败');
+                console.error(err);
+            }
+        });
+    }
+
+    function showStudentModal(studentId) {
+        $.ajax({
+            url: `/api/students/${studentId}`, // 获取单个学生信息的API端点
+            method: 'GET',
+            success: function (student) {
+                $('#studentId').val(student.studentId);
+                $('#studentName').val(student.name);
+                $('#studentGender').val(student.gender);
+                $('#studentEthnicity').val(student.ethnicity);
+                $('#studentNativePlace').val(student.nativePlace);
+                $('#studentDOB').val(student.dateOfBirth);
+                $('#studentPoliticalStatus').val(student.politicalStatus);
+                $('#studentModal').modal('show');
+            },
+            error: function (err) {
+                alert('获取学生信息失败');
+                console.error(err);
+            }
+        });
+    }
+
+    function updateStudent() {
+        let studentId = $('#studentId').val();
+        let studentData = {
+            name: $('#studentName').val(),
+            gender: $('#studentGender').val(),
+            ethnicity: $('#studentEthnicity').val(),
+            nativePlace: $('#studentNativePlace').val(),
+            dateOfBirth: $('#studentDOB').val(),
+            politicalStatus: $('#studentPoliticalStatus').val()
+        };
+
+        $.ajax({
+            url: `/api/students/${studentId}`, // 假设这个URL是更新数据的API端点
+            method: 'PUT',
+            contentType: 'application/json',
+            data: JSON.stringify(studentData),
+            success: function (response) {
+                $('#studentModal').modal('hide');
+                loadStudents();
+            },
+            error: function (err) {
+                alert('更新学生信息失败');
+                console.error(err);
+            }
+        });
+    }
+</script>
+</body>
+</html>

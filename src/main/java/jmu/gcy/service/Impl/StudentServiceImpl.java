@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Service
 public class StudentServiceImpl implements StudentService {
@@ -31,6 +32,17 @@ public class StudentServiceImpl implements StudentService {
         session.invalidate(); // 销毁会话
         // 如果有其他与会话相关的清理工作，也可以在这里进行
     }
+
+    @Override
+    public List<Student> getAllStudents() {
+        return studentMapper.getAllStudents();
+    }
+
+    @Override
+    public int updateStudent(Student student) {
+        return studentMapper.updateStudent(student);
+    }
+
     @Override
     public Student getStudentById(Integer studentId) {
         return studentMapper.getStudentById(studentId);
